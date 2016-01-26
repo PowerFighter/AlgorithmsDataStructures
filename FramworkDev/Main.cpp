@@ -44,10 +44,9 @@ int main()
 	// start timer
 	QueryPerformanceCounter(&t1);
 
-	//SortImpl->BubbleSort(SORT_ORDER::descending);
-	//SortImpl->InsertionSort(SORT_ORDER::descending);
-	SortImpl->SelectionSort(SORT_ORDER::descending);
-
+	//Call selection sort
+	//SortImpl->SelectionSort(SORT_ORDER::descending);
+	SortImpl->InsertionSort(SORT_ORDER::ascending);
 	// stop timer
 	QueryPerformanceCounter(&t2);
 
