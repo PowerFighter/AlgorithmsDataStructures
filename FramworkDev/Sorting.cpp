@@ -139,6 +139,106 @@ void Sorting::BubbleSort(SORT_ORDER type)
 	}
 }
 
+//Entry point for merge sort
+void Sorting::MergeSort(SORT_ORDER type)
+{
+	DividePreMerge(0, count - 1,type);
+}
+
+//Implementation of Merge Sort
+void Sorting::DividePreMerge(int start, int end, SORT_ORDER type)
+{
+	int pivot = 0;
+	if (start < end)
+	{
+		pivot = (start + end) / 2;
+		//First half at pivot
+		DividePreMerge(start, pivot,type);
+		//Second half from pivot to end
+		DividePreMerge(pivot + 1, end , type);
+
+		//Now merge divided arr
+		Merge(start, pivot, pivot + 1, end,type);
+	}
+	
+}
+
+
+void Sorting::Merge(int Arr1Start, int Arr1End, int Arr2Start, int Arr2End, SORT_ORDER type)
+{
+	int lengthArr1 = Arr1End - Arr1Start + 1;
+	int lengthArr2 = Arr2End - Arr2Start + 1;
+
+	int arr1Count = Arr1Start;
+	int arr2Count = Arr2Start;
+
+	//Create a temp array to accomodate merging
+	int *temp = new int[lengthArr1 + lengthArr2];
+	int tempArrCount = 0;
+
+	//Loop through both the arrays
+	//Performing merge into temp
+	while (arr1Count < Arr1Start + lengthArr1 &&  arr2Count < Arr2Start + lengthArr2)
+	{
+		if (a[arr1Count] <= a[arr2Count])
+		{
+			if (type == SORT_ORDER::ascending)
+			{
+				temp[tempArrCount] = a[arr1Count];
+				arr1Count++;
+			}
+			else
+			{
+				temp[tempArrCount] = a[arr2Count];
+				arr2Count++;
+			}
+		}
+		else
+		{
+			if (type == SORT_ORDER::ascending)
+			{
+				temp[tempArrCount] = a[arr2Count];
+				arr2Count++;
+			}
+			else
+			{
+				temp[tempArrCount] = a[arr1Count];
+				arr1Count++;
+			}
+
+		}
+		tempArrCount++;
+	}
+
+	//Now at this point we will have left overs
+	//Cleanup arr1 leftovers
+	while (arr1Count < Arr1Start + lengthArr1)
+	{
+		temp[tempArrCount] = a[arr1Count];
+		arr1Count++;
+		tempArrCount++;
+	}
+
+	//Cleanup arr2 leftovers
+	while (arr2Count < Arr2Start + lengthArr2)
+	{
+		temp[tempArrCount] = a[arr2Count];
+		arr2Count++;
+		tempArrCount++;
+	}
+
+	//Copy back the temp array into inp
+	int mainIndex = Arr1Start;
+	for (int j = 0; j < tempArrCount; j++)
+	{
+		a[mainIndex] = temp[j];
+		mainIndex++;
+	}
+
+	//Cleanup temp
+	delete temp;
+}
+
 //Print the data
 void Sorting::PrintData()
 {
@@ -152,3 +252,4 @@ void Sorting::PrintData()
 	cout << endl;
 	cout << "Count of Array " << count << endl;
 }
+

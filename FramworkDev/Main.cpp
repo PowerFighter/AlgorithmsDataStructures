@@ -49,7 +49,9 @@ int main()
 
 	//Call selection sort
 	//SortImpl->SelectionSort(SORT_ORDER::descending);
-	SortImpl->InsertionSort(SORT_ORDER::ascending);
+	//SortImpl->InsertionSort(SORT_ORDER::ascending);
+	SortImpl->MergeSort(SORT_ORDER::descending);
+
 	// stop timer
 	QueryPerformanceCounter(&t2);
 
@@ -60,13 +62,10 @@ int main()
 
 	SortImpl->PrintData();
 	
-	
-	cout << "Factorial of 5 " << ComputeFactorial(5) << endl;
-	
-	cin.clear();
-	Reverse("ABC",0,3);
+	//Reverse using recursion
+	//Reverse("ABC",0,3);
 
-	/*  one.insert(3);
+	/* one.insert(3);
 	one.insert(1);
 	one.insert(4);
 	one.insert(2);

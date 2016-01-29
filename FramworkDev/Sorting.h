@@ -7,6 +7,7 @@ enum SORT_ORDER
 
 class Sorting
 {
+	//Array pointer
 	int* a;
 
 	//Count of the array
@@ -31,6 +32,11 @@ class Sorting
 	//Bubble Sort implementation
 	void BubbleSort(SORT_ORDER type);
 	
+	//Merge Sort implementation
+	void MergeSort(SORT_ORDER type);
+	void DividePreMerge(int start, int end,SORT_ORDER type);
+	void Merge(int Arr1Start, int Arr1End, int Arr2Start, int Arr2End,SORT_ORDER type);
+
 	//Print the data
 	void PrintData();
 };
