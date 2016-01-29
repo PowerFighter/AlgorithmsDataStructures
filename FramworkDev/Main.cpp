@@ -3,6 +3,9 @@
 #include "doubleLinkedList.cpp"
 #include "Sorting.h"
 
+//Recursion tests
+#include "Recursion.h"
+
 //For performance query counter
 #include <tchar.h>
 #include <windows.h>
@@ -56,7 +59,12 @@ int main()
 	cout << "Time Elapsed : " << elapsedTime << endl;
 
 	SortImpl->PrintData();
-	//one.insert(50);
+	
+	
+	cout << "Factorial of 5 " << ComputeFactorial(5) << endl;
+	
+	cin.clear();
+	Reverse("ABC",0,3);
 
 	/*  one.insert(3);
 	one.insert(1);
