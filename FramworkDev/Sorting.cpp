@@ -239,6 +239,73 @@ void Sorting::Merge(int Arr1Start, int Arr1End, int Arr2Start, int Arr2End, SORT
 	delete temp;
 }
 
+//Entry point for quick sort
+void Sorting::QuickSort(SORT_ORDER type)
+{
+	DividePrePartition(0, count - 1, type);
+}
+
+//Partition the Array and find the index of the partition
+int Sorting::PartitionArray(int start,int end,SORT_ORDER type)
+{
+	//get the mid point
+	int midIndex = (start + end) / 2;
+	
+	//Move the mid point to end
+	Swap(midIndex, end);
+
+	int pIndex = start;
+
+	for (int i = start; i < end; i++)
+	{
+		if (type == SORT_ORDER::ascending)
+		{
+			if (a[i] <= a[end])
+			{
+				Swap(i, pIndex);
+				pIndex++;
+			}
+		}
+		else
+		{
+			if (a[i] > a[end])
+			{
+				Swap(i, pIndex);
+				pIndex++;
+			}
+		}
+		
+	}
+	
+	//Now swap back the pivot to pIndex
+	Swap(pIndex, end);
+
+	return pIndex;
+}
+
+//Find the Partition index and recursively go down the tree till we hit illegal range or single element
+void Sorting::DividePrePartition(int start, int end, SORT_ORDER type)
+{
+	if (start < end)
+	{
+		int partitionIndex = PartitionArray(start, end, type);
+		DividePrePartition(start, partitionIndex - 1, type);
+		DividePrePartition(partitionIndex + 1, end, type);
+	}
+}
+
+//Swap two indices in the array
+void Sorting::Swap(int indexA, int indexB)
+{
+	if (indexA >= count || indexB >= count || indexA == indexB)
+		return;
+
+	int tmp = a[indexA];
+	a[indexA] = a[indexB];
+	a[indexB] = tmp;
+
+}
+
 //Print the data
 void Sorting::PrintData()
 {

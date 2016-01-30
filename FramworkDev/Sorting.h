@@ -37,6 +37,22 @@ class Sorting
 	void DividePreMerge(int start, int end,SORT_ORDER type);
 	void Merge(int Arr1Start, int Arr1End, int Arr2Start, int Arr2End,SORT_ORDER type);
 
+	/*Quick Sort implementation*/
+
+	//Entry point for quicksort
+	void QuickSort(SORT_ORDER type);
+
+	//Partition the array and return the index of the pivot	
+	int PartitionArray(int start, int end, SORT_ORDER type);
+
+	//Divide the array based on the partition index
+	void DividePrePartition(int start, int end, SORT_ORDER type);
+	
+	/*End Quick Sort implementation*/
+
+	//Swap the elements at indexA and indexB
+	void Swap(int indexA, int indexB);
+
 	//Print the data
 	void PrintData();
 };

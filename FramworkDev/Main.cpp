@@ -50,7 +50,8 @@ int main()
 	//Call selection sort
 	//SortImpl->SelectionSort(SORT_ORDER::descending);
 	//SortImpl->InsertionSort(SORT_ORDER::ascending);
-	SortImpl->MergeSort(SORT_ORDER::descending);
+	//SortImpl->MergeSort(SORT_ORDER::descending);
+	SortImpl->QuickSort(SORT_ORDER::descending);
 
 	// stop timer
 	QueryPerformanceCounter(&t2);
