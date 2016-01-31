@@ -68,7 +68,7 @@ datType List<datType>::deleteFromHeadAndReturn()
 	_size--;
 
 	if (_size == 0) {
-		cout << "Nullifying the tail" << endl;
+		//cout << "Nullifying the tail" << endl;
 		tail = NULL;
 	}
 
@@ -121,7 +121,7 @@ void List<datType>::deleteFromPosition(int position)
 			tail = iterator;
 		}
 		else {
-			cout << "Nullifying the tail" << endl;
+			//cout << "Nullifying the tail" << endl;
 			tail = NULL;
 		}
 	}
@@ -143,7 +143,7 @@ void List<datType>::deleteFromHead()
 	_size--;
 
 	if (_size == 0) {
-		cout << "Nullifying the tail" << endl;
+		//cout << "Nullifying the tail" << endl;
 		tail = NULL;
 	}
 }
@@ -182,7 +182,7 @@ void List<datType>::deleteFromTail()
 	}
 	else 
 	{
-		cout << "Nullifying the tail" << endl;
+		//cout << "Nullifying the tail" << endl;
 		tail = NULL;
 	}
 }

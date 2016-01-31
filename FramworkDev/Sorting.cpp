@@ -1,4 +1,5 @@
 #include "Sorting.h"
+#include <cmath>
 #include <iostream>
 using namespace std;
 
@@ -15,6 +16,9 @@ Sorting::Sorting(int size)
 	
 	AllocSize = size;
 	count = 0;
+
+	//Create the radix queues
+	radixQueues = new lqueue<int>[10];
 } 
 
 void Sorting::AddData(int data)
@@ -294,6 +298,55 @@ void Sorting::DividePrePartition(int start, int end, SORT_ORDER type)
 	}
 }
 
+//Radix Sort implementation
+void Sorting::RadixSort(SORT_ORDER type)
+{
+	if (count == 0)
+		return;
+
+	//Get the max element and get the number of digits
+	int m = GetMax();
+	int digitsNo = 1;
+	
+	int divisor = 10;
+
+	while (m / divisor > 0)
+	{
+		digitsNo++;
+		divisor *= 10;
+	}
+	
+	int currentDivisor = 1;
+	for (int i = 1; i <= digitsNo; i++)
+	{
+		RadixSortPass(type, currentDivisor);
+		currentDivisor *= 10;
+	}
+}
+
+//One pass of radix sort with the current divisor
+void Sorting::RadixSortPass(SORT_ORDER type, int currentDivisor)
+{
+	for (int i = 0; i < count; i++)
+	{
+		int tmp = a[i];
+
+		int currentSigDigit = (tmp / currentDivisor) % 10;
+		radixQueues[currentSigDigit].push_from_back(tmp);
+	}
+
+	int count = 0;
+	//Reassemble main array
+	for (int i = 0; i < 10; i++)
+	{
+		while (!radixQueues[i].is_empty())
+		{
+			a[count] = radixQueues[i].take_from_front();
+			count++;
+		}
+	}
+}
+
 //Swap two indices in the array
 void Sorting::Swap(int indexA, int indexB)
 {
@@ -304,6 +357,25 @@ void Sorting::Swap(int indexA, int indexB)
 	a[indexA] = a[indexB];
 	a[indexB] = tmp;
 
+}
+
+//Get the max element in the array
+int Sorting::GetMax()
+{
+	int max = -1;
+	
+	if (count == 0)
+		return max;
+	
+	max = a[0];
+
+	for (int i = 1; i < count; i++)
+	{
+		if (a[i] > max)
+			max = a[i];
+	}
+
+	return max;
 }
 
 //Print the data

@@ -28,8 +28,6 @@ class List
   lNode<datType>* appendToTailAndReturn(int data);
   datType deleteFromHeadAndReturn();
 
- 
-
   private:
   //Specifics for current count / size
   int _size;

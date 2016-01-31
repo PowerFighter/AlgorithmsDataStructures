@@ -1,3 +1,4 @@
+#pragma once
 /*	Queue using a linked list
 	Uses the linked list class defined in linkedList.h 
 	Templated so can accept any generic datatype  */
