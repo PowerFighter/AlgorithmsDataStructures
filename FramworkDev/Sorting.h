@@ -53,12 +53,15 @@ class Sorting
 	
 	/*End Quick Sort implementation*/
 	
-	/* Radix Sort*/
+	/* Radix Sort */
+
 	//Linked list queues
 	lqueue<int> *radixQueues;
 	
-	//Radix sort
+	//Radix sort entry point
 	void RadixSort(SORT_ORDER type);
+
+	//Radix sort pass
 	void RadixSortPass(SORT_ORDER type,int currentDivisor);
 
 	/* End Radix Sort Implementation*/
