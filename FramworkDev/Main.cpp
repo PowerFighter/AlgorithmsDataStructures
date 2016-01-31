@@ -52,7 +52,7 @@ int main()
 	//SortImpl->InsertionSort(SORT_ORDER::ascending);
 	//SortImpl->MergeSort(SORT_ORDER::descending);
 	//SortImpl->QuickSort(SORT_ORDER::descending);
-	//SortImpl->RadixSort(SORT_ORDER::ascending);
+	//SortImpl->RadixSort(SORT_ORDER::descending);
 
 	//stop timer
 	QueryPerformanceCounter(&t2);

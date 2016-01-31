@@ -35,10 +35,18 @@ class Sorting
 	//Bubble Sort implementation
 	void BubbleSort(SORT_ORDER type);
 	
-	//Merge Sort implementation
+	/*Merge Sort implementation */
+
+	//Merge Sort entry point
 	void MergeSort(SORT_ORDER type);
+
+	//Divide the array pre merge
 	void DividePreMerge(int start, int end,SORT_ORDER type);
+	
+	//Merge the divided arrays
 	void Merge(int Arr1Start, int Arr1End, int Arr2Start, int Arr2End,SORT_ORDER type);
+
+	/*End Merge Sort implementation*/
 
 	/*Quick Sort implementation*/
 
@@ -62,9 +70,13 @@ class Sorting
 	void RadixSort(SORT_ORDER type);
 
 	//Radix sort pass
-	void RadixSortPass(SORT_ORDER type,int currentDivisor);
+	void RadixSortPass(SORT_ORDER type,int currentDivisor,bool isFinalPass);
 
 	/* End Radix Sort Implementation*/
+
+	/* Shell Sort */
+	
+	/*End Shell Sort Implementation */
 
 	/*Utility functions*/
 	//Swap the elements at indexA and indexB

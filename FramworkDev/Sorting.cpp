@@ -319,13 +319,13 @@ void Sorting::RadixSort(SORT_ORDER type)
 	int currentDivisor = 1;
 	for (int i = 1; i <= digitsNo; i++)
 	{
-		RadixSortPass(type, currentDivisor);
+		RadixSortPass(type, currentDivisor,(i == digitsNo));
 		currentDivisor *= 10;
 	}
 }
 
 //One pass of radix sort with the current divisor
-void Sorting::RadixSortPass(SORT_ORDER type, int currentDivisor)
+void Sorting::RadixSortPass(SORT_ORDER type, int currentDivisor,bool isFinalPass)
 {
 	for (int i = 0; i < count; i++)
 	{
@@ -335,16 +335,34 @@ void Sorting::RadixSortPass(SORT_ORDER type, int currentDivisor)
 		radixQueues[currentSigDigit].push_from_back(tmp);
 	}
 
-	int count = 0;
-	//Reassemble main array
-	for (int i = 0; i < 10; i++)
+	int startCount = 0;
+
+	if (isFinalPass && type == SORT_ORDER::descending)
 	{
-		while (!radixQueues[i].is_empty())
+		startCount = count - 1;
+		for (int i = 0; i < 10; i++)
 		{
-			a[count] = radixQueues[i].take_from_front();
-			count++;
+			while (!radixQueues[i].is_empty())
+			{
+				a[startCount] = radixQueues[i].take_from_front();
+				startCount--;
+			}
 		}
 	}
+	else
+	{
+		//Reassemble main array
+		for (int i = 0; i < 10; i++)
+		{
+			while (!radixQueues[i].is_empty())
+			{
+				a[startCount] = radixQueues[i].take_from_front();
+				startCount++;
+			}
+		}
+	}
+	
+
 }
 
 //Swap two indices in the array
