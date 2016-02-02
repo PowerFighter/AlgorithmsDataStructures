@@ -365,6 +365,42 @@ void Sorting::RadixSortPass(SORT_ORDER type, int currentDivisor,bool isFinalPass
 
 }
 
+//Shell sort is basically inserting sort or bubble sort on the same array with elements seperated by gap
+//Idea is since insertion sort is super fast when the array is nearly sorted
+//We apply insertion sort (gap = 1) after we run the preprocess sorts of subarrays seperated by gap
+//Hoping that the array will be nearly sorted when we reach gap = 1
+void Sorting::ShellSort(SORT_ORDER type)
+{
+	//Find the gap
+	int gap = count / 2;
+
+	while (gap > 0)
+	{
+		//cout << "Gap " << gap << endl;
+		int k;
+		//Find the subarrays
+		for (int i = gap; i >= 0; i--)
+		{
+			for (int j = gap - i; j < count; j += gap)
+			{
+				int temp = a[j];
+				for (k = j; k > gap - i; k -= gap)
+				{
+					if (type == SORT_ORDER::ascending && a[k - gap] < temp)
+						break;
+
+					if (type == SORT_ORDER::descending && a[k - gap] > temp)
+						break;
+
+					a[k] = a[k - gap];
+				}
+				a[k] = temp;
+			}
+		}
+		gap = gap / 2;
+	}
+}
+
 //Swap two indices in the array
 void Sorting::Swap(int indexA, int indexB)
 {

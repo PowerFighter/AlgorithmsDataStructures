@@ -75,7 +75,8 @@ class Sorting
 	/* End Radix Sort Implementation*/
 
 	/* Shell Sort */
-	
+	void ShellSort(SORT_ORDER type);
+
 	/*End Shell Sort Implementation */
 
 	/*Utility functions*/

@@ -23,7 +23,7 @@ int main()
 	Sorting* SortImpl;
 	
 	int xRan;
-	int ArrayNo = 10000;
+	int ArrayNo = 1000;
 	srand(time(0));
 
 	SortImpl = new Sorting(ArrayNo);
@@ -53,6 +53,7 @@ int main()
 	//SortImpl->MergeSort(SORT_ORDER::descending);
 	//SortImpl->QuickSort(SORT_ORDER::descending);
 	//SortImpl->RadixSort(SORT_ORDER::descending);
+	SortImpl->ShellSort(SORT_ORDER::ascending);
 
 	//stop timer
 	QueryPerformanceCounter(&t2);
