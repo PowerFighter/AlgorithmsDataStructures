@@ -2,6 +2,7 @@
 #include "stackUsingLinkedList.cpp"
 #include "doubleLinkedList.cpp"
 #include "Sorting.h"
+#include "Heap.h"
 
 //Recursion tests
 #include "Recursion.h"
@@ -20,22 +21,43 @@ DoubleLinkedList<int> dlList;
 
 int main()
 {
-	Sorting* SortImpl;
+	//Sorting* SortImpl;
 	
 	int xRan;
 	int ArrayNo = 1000;
 	srand(time(0));
 
-	SortImpl = new Sorting(ArrayNo);
+	Heap* heap;
 
-	for (int i = 0; i < ArrayNo; i++)
-	{
-		 // This will ensure a really randomized number by help of time.
-		xRan = rand() % ArrayNo + 1; // Randomizing the number between 1-15
-		SortImpl->AddData(xRan);
-	}
+	heap = new Heap(9, HeapType::MaxHeap);
+	heap->Insert(18);
+	heap->Insert(11);
+	heap->Insert(12);
+	heap->Insert(7);
+	heap->Insert(14);
 
-	SortImpl->PrintData();
+	heap->Insert(42);
+	heap->Insert(30);
+	heap->Insert(18);
+	heap->Insert(29);
+
+	heap->PrintHeap();
+
+	cout << "Root : " << heap->ExtractRoot() << endl;
+	cout << "Root : " << heap->ExtractRoot() << endl;
+
+	heap->PrintHeap();
+
+	//SortImpl = new Sorting(ArrayNo);
+
+	//for (int i = 0; i < ArrayNo; i++)
+	//{
+	//	 // This will ensure a really randomized number by help of time.
+	//	xRan = rand() % ArrayNo + 1; // Randomizing the number between 1-15
+	//	SortImpl->AddData(xRan);
+	//}
+
+	//SortImpl->PrintData();
 
 	LARGE_INTEGER frequency;        // ticks per second
 	LARGE_INTEGER t1, t2;           // ticks
@@ -53,7 +75,7 @@ int main()
 	//SortImpl->MergeSort(SORT_ORDER::descending);
 	//SortImpl->QuickSort(SORT_ORDER::descending);
 	//SortImpl->RadixSort(SORT_ORDER::descending);
-	SortImpl->ShellSort(SORT_ORDER::ascending);
+	//SortImpl->ShellSort(SORT_ORDER::ascending);
 
 	//stop timer
 	QueryPerformanceCounter(&t2);
@@ -63,7 +85,7 @@ int main()
 	
 	cout << "Time Elapsed : " << elapsedTime << endl;
 
-	SortImpl->PrintData();
+	//SortImpl->PrintData();
 	
 	//Reverse using recursion
 	//Reverse("ABC",0,3);
