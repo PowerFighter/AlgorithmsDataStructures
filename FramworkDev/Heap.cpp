@@ -1,4 +1,5 @@
 #include "Heap.h"
+#include <cmath>
 #include <iostream>
 using namespace std;
 
@@ -8,6 +9,21 @@ Heap::Heap(int maxSize,HeapType heapType)
 	this->maxSize = maxSize;
 	size = 0;
 	type = heapType;
+}
+
+//This constructor builds a heap from a passed in array
+Heap::Heap(int* inArr, int maxSize, HeapType heapType)
+{
+	Arr = inArr;
+	this->maxSize = maxSize;
+	size = maxSize;
+	type = heapType;
+
+	//Enforce heap property
+	for (int i = floor(size/2) - 1; i >= 0; i--)
+	{
+		SiftDown(i);
+	}		
 }
 
 int Heap::ExtractRoot()
@@ -38,52 +54,111 @@ void Heap::SiftUp(int i)
 {
 	int currPos = i;
 	int val = Arr[i];
-	//cout << " Parent for " << val << " is " << Parent(currPos) << endl;
-	while (i > 0 && Arr[Parent(i)] < Arr[i])
+
+	if (type == HeapType::MaxHeap)
 	{
-		//Swap i and parent of i
-		int temp = Arr[i];
-		Arr[i] = Arr[Parent(i)];
-		Arr[Parent(i)] = temp;
-		i = Parent(i);
+		//cout << " Parent for " << val << " is " << Parent(currPos) << endl;
+		while (i > 0 && Arr[Parent(i)] < Arr[i])
+		{
+			//Swap i and parent of i
+			int temp = Arr[i];
+			Arr[i] = Arr[Parent(i)];
+			Arr[Parent(i)] = temp;
+			i = Parent(i);
+		}
+		//cout << "Final Position for " << val << " Initial Position " << currPos << " Is : " << i << endl;
 	}
-	//cout << "Final Position for " << val << " Initial Position " << currPos << " Is : " << i << endl;
+
+	if (type == HeapType::MinHeap)
+	{
+		//cout << " Parent for " << val << " is " << Parent(currPos) << endl;
+		while (i > 0 && Arr[Parent(i)] >= Arr[i])
+		{
+			//Swap i and parent of i
+			int temp = Arr[i];
+			Arr[i] = Arr[Parent(i)];
+			Arr[Parent(i)] = temp;
+			i = Parent(i);
+		}
+		//cout << "Final Position for " << val << " Initial Position " << currPos << " Is : " << i << endl;
+	}
+
 }
 
 void Heap::SiftDown(int i)
 {
-	while (i < size)
+	if (type == HeapType::MaxHeap)
 	{
-		int maxIndex = i;
-		int leftChild = LeftChild(i);
-		int maxVal = Arr[i];
-
-		if (leftChild < size && maxVal < Arr[leftChild])
+		while (i < size)
 		{
-			maxVal = Arr[leftChild];
-			maxIndex = leftChild;
-		}
+			int maxIndex = i;
+			int leftChild = LeftChild(i);
+			int maxVal = Arr[i];
 
-		int rightChild = RightChild(i);
+			if (leftChild < size && maxVal < Arr[leftChild])
+			{
+				maxVal = Arr[leftChild];
+				maxIndex = leftChild;
+			}
 
-		if (rightChild < size && maxVal < Arr[rightChild])
-		{
-			maxVal = Arr[rightChild];
-			maxIndex = rightChild;
-		}
+			int rightChild = RightChild(i);
 
-		//If max index == i at this stage means we have heap property satisfied
-		if (maxIndex != i)
-		{
-			//Swap max index and i
-			int temp = Arr[maxIndex];
-			Arr[maxIndex] = Arr[i];
-			Arr[i] = temp;
-			i = maxIndex;
+			if (rightChild < size && maxVal < Arr[rightChild])
+			{
+				maxVal = Arr[rightChild];
+				maxIndex = rightChild;
+			}
+
+			//If max index == i at this stage means we have heap property satisfied
+			if (maxIndex != i)
+			{
+				//Swap max index and i
+				int temp = Arr[maxIndex];
+				Arr[maxIndex] = Arr[i];
+				Arr[i] = temp;
+				i = maxIndex;
+			}
+			else
+				break;
 		}
-		else
-			break;
 	}
+
+	if (type == HeapType::MinHeap)
+	{
+		while (i < size)
+		{
+			int minIndex = i;
+			int leftChild = LeftChild(i);
+			int minVal = Arr[i];
+
+			if (leftChild < size && minVal >= Arr[leftChild])
+			{
+				minVal = Arr[leftChild];
+				minIndex = leftChild;
+			}
+
+			int rightChild = RightChild(i);
+
+			if (rightChild < size && minVal >= Arr[rightChild])
+			{
+				minVal = Arr[rightChild];
+				minIndex = rightChild;
+			}
+
+			//If max index == i at this stage means we have heap property satisfied
+			if (minIndex != i)
+			{
+				//Swap max index and i
+				int temp = Arr[minIndex];
+				Arr[minIndex] = Arr[i];
+				Arr[i] = temp;
+				i = minIndex;
+			}
+			else
+				break;
+		}
+	}
+	
 }
 
 bool Heap::Insert(int val)
@@ -108,4 +183,9 @@ void Heap::PrintHeap()
 		cout << Arr[i] << " ";
 		cout << endl;
 	}
+}
+
+bool Heap::IsEmpty()
+{
+	return size == 0;
 }

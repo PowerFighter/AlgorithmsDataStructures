@@ -21,13 +21,29 @@ DoubleLinkedList<int> dlList;
 
 int main()
 {
-	//Sorting* SortImpl;
-	
 	int xRan;
-	int ArrayNo = 1000;
+	int ArrayNo = 15;
 	srand(time(0));
 
-	Heap* heap;
+	//int* arr = new int[8];
+
+	//for (int i = 0; i < 8; i++)
+	//{
+	//	arr[i] = rand() % 50 + 1;
+	//}
+	//cout << "Initial Array " << endl;
+	//
+	//for (int i = 0; i < 8; i++)
+	//{
+	//	cout << arr[i] << endl;// = rand() % 50 + 1;
+	//}
+
+	//cout << "After heap building " << endl;
+
+	/*Heap* heapSort = new Heap(arr,8, HeapType::MaxHeap);
+	heapSort->PrintHeap();*/
+
+	/*Heap* heap;
 
 	heap = new Heap(9, HeapType::MaxHeap);
 	heap->Insert(18);
@@ -46,18 +62,19 @@ int main()
 	cout << "Root : " << heap->ExtractRoot() << endl;
 	cout << "Root : " << heap->ExtractRoot() << endl;
 
-	heap->PrintHeap();
+	heap->PrintHeap();*/
 
-	//SortImpl = new Sorting(ArrayNo);
+	Sorting* SortImpl;
+	SortImpl = new Sorting(ArrayNo);
 
-	//for (int i = 0; i < ArrayNo; i++)
-	//{
-	//	 // This will ensure a really randomized number by help of time.
-	//	xRan = rand() % ArrayNo + 1; // Randomizing the number between 1-15
-	//	SortImpl->AddData(xRan);
-	//}
+	for (int i = 0; i < ArrayNo; i++)
+	{
+		 // This will ensure a really randomized number by help of time.
+		xRan = rand() % ArrayNo + 1; // Randomizing the number between 1-15
+		SortImpl->AddData(xRan);
+	}
 
-	//SortImpl->PrintData();
+	SortImpl->PrintData();
 
 	LARGE_INTEGER frequency;        // ticks per second
 	LARGE_INTEGER t1, t2;           // ticks
@@ -76,6 +93,7 @@ int main()
 	//SortImpl->QuickSort(SORT_ORDER::descending);
 	//SortImpl->RadixSort(SORT_ORDER::descending);
 	//SortImpl->ShellSort(SORT_ORDER::ascending);
+	SortImpl->HeapSort(SORT_ORDER::ascending);
 
 	//stop timer
 	QueryPerformanceCounter(&t2);
@@ -85,7 +103,7 @@ int main()
 	
 	cout << "Time Elapsed : " << elapsedTime << endl;
 
-	//SortImpl->PrintData();
+	SortImpl->PrintData();
 	
 	//Reverse using recursion
 	//Reverse("ABC",0,3);

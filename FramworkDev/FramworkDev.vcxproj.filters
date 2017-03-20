@@ -48,6 +48,9 @@
     <ClInclude Include="Recursion.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Heap.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="linkedList.cpp">
@@ -69,6 +72,9 @@
       <Filter>Source Files\Sorting</Filter>
     </ClCompile>
     <ClCompile Include="BinarySearchTree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Heap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

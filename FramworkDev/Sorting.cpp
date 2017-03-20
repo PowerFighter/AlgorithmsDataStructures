@@ -1,4 +1,5 @@
 #include "Sorting.h"
+#include "Heap.h"
 #include <cmath>
 #include <iostream>
 using namespace std;
@@ -399,6 +400,22 @@ void Sorting::ShellSort(SORT_ORDER type)
 		}
 		gap = gap / 2;
 	}
+}
+
+void Sorting::HeapSort(SORT_ORDER type)
+{
+	if (count == 0)
+	{
+		cout << "Data array is empty" << endl;
+		return;
+	}
+	
+	HeapType heapType = (type == SORT_ORDER::ascending) ? HeapType::MaxHeap : HeapType::MinHeap;
+	
+	Heap *h = new Heap(a, count, heapType);
+
+	while (!h->IsEmpty())
+		h->ExtractRoot();
 }
 
 //Swap two indices in the array

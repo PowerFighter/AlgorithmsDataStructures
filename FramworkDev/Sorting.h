@@ -79,6 +79,11 @@ class Sorting
 
 	/*End Shell Sort Implementation */
 
+	/*Heap Sort*/
+	void HeapSort(SORT_ORDER type);
+
+	/*End Heap Sort*/
+
 	/*Utility functions*/
 	//Swap the elements at indexA and indexB
 	void Swap(int indexA, int indexB);

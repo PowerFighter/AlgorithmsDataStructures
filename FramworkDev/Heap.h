@@ -41,6 +41,7 @@ class Heap
 public:
 	
 	Heap(int maxSize,HeapType heapType);
+	Heap(int* Arr, int maxSize, HeapType heapType);
 
 	//Get the type of the current heap
 	HeapType GetTypeOfHeap();
@@ -57,4 +58,7 @@ public:
 	//Insert a value into this heap
 	//Returns if operation was a success or not
 	bool Insert(int val);
+
+	//Is the heap empty
+	bool IsEmpty();
 };
