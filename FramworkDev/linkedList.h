@@ -13,19 +13,19 @@ class List
   List();
 
   //Function declarations
-  void appendToTail(int data);
-  void appendToHead(int data);
-  void appendToPosition(int data , int position);
+  void appendToTail(datType data);
+  void appendToHead(datType data);
+  void appendToPosition(datType data , int position);
   void deleteFromTail();
   void deleteFromHead();
   void deleteFromPosition(int position);
-  void iterateAndPrint();
+  void printList();
   int getSize();
   lNode<datType>* GetTail();
   void clear();
 
   //Specifics for queue
-  lNode<datType>* appendToTailAndReturn(int data);
+  lNode<datType>* appendToTailAndReturn(datType data);
   datType deleteFromHeadAndReturn();
 
   private:

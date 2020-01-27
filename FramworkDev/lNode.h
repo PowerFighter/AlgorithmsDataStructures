@@ -5,5 +5,5 @@ struct lNode
 {
 	//Data held (Note) This can be anything other than int
 	datType data;
-	lNode *nextlNode;
+	lNode<datType>* nextlNode;
 };

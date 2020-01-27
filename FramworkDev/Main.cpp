@@ -64,27 +64,27 @@ int main()
 
 	heap->PrintHeap();*/
 
-	Sorting* SortImpl;
-	SortImpl = new Sorting(ArrayNo);
+	//Sorting* SortImpl;
+	//SortImpl = new Sorting(ArrayNo);
 
-	for (int i = 0; i < ArrayNo; i++)
-	{
-		 // This will ensure a really randomized number by help of time.
-		xRan = rand() % ArrayNo + 1; // Randomizing the number between 1-15
-		SortImpl->AddData(xRan);
-	}
+	//for (int i = 0; i < ArrayNo; i++)
+	//{
+	//	 // This will ensure a really randomized number by help of time.
+	//	xRan = rand() % ArrayNo + 1; // Randomizing the number between 1-15
+	//	SortImpl->AddData(xRan);
+	//}
 
-	SortImpl->PrintData();
+	//SortImpl->PrintData();
 
-	LARGE_INTEGER frequency;        // ticks per second
-	LARGE_INTEGER t1, t2;           // ticks
-	double elapsedTime;
+	//LARGE_INTEGER frequency;        // ticks per second
+	//LARGE_INTEGER t1, t2;           // ticks
+	//double elapsedTime;
 
-	// get ticks per second
-	QueryPerformanceFrequency(&frequency);
+	//// get ticks per second
+	//QueryPerformanceFrequency(&frequency);
 
-	// start timer
-	QueryPerformanceCounter(&t1);
+	//// start timer
+	//QueryPerformanceCounter(&t1);
 
 	//Call selection sort
 	//SortImpl->SelectionSort(SORT_ORDER::descending);
@@ -93,17 +93,17 @@ int main()
 	//SortImpl->QuickSort(SORT_ORDER::descending);
 	//SortImpl->RadixSort(SORT_ORDER::descending);
 	//SortImpl->ShellSort(SORT_ORDER::ascending);
-	SortImpl->HeapSort(SORT_ORDER::ascending);
+	//SortImpl->HeapSort(SORT_ORDER::ascending);
 
 	//stop timer
-	QueryPerformanceCounter(&t2);
+	//QueryPerformanceCounter(&t2);
 
 	// compute and print the elapsed time in millisec
-	elapsedTime = (t2.QuadPart - t1.QuadPart) * 1000.0 / frequency.QuadPart;
+	//elapsedTime = (t2.QuadPart - t1.QuadPart) * 1000.0 / frequency.QuadPart;
 	
-	cout << "Time Elapsed : " << elapsedTime << endl;
+	//cout << "Time Elapsed : " << elapsedTime << endl;
 
-	SortImpl->PrintData();
+	//SortImpl->PrintData();
 	
 	//Reverse using recursion
 	//Reverse("ABC",0,3);
@@ -165,17 +165,17 @@ int main()
 	two.appendToHead(50);
 	two.appendToTail(4);
 	two.appendToPosition(35,2);
-	two.iterateAndPrint();*/
+	two.printList();*/
 	/* two.deleteFromTail();
 	two.deleteFromTail();
 	two.deleteFromTail();
-	two.iterateAndPrint();
+	two.printList();
 	two.deleteFromHead();
 	two.deleteFromHead();
-	two.iterateAndPrint();*/
+	two.printList();*/
 
 	// two.deleteFromPosition(3);
-	// two.iterateAndPrint();
+	// two.printList();
 	/*testQueue.push_from_back(5);
 	cout<<"Is the queue empty : "<<testQueue.is_empty()<<endl;
 	testQueue.push_from_back(6);
@@ -187,33 +187,54 @@ int main()
 	cout<<"Taking value again : "<<testQueue.take_from_front()<<endl;
 	testQueue.print_queue();*/
 
-	/*
-	List test;
+	
+	List<int> test;
 
 	test.appendToHead(1);
-	test.iterateAndPrint();
+	test.printList();
 	test.appendToHead(2);
-	test.iterateAndPrint();
+	test.printList();
+	test.appendToHead(3);
+	test.printList();
+	test.appendToHead(10);
+	test.printList();
+	test.appendToHead(11);
+	test.printList();
+	test.appendToTail(12);
+	test.printList();
 	//test.deleteFromHeadAndReturn();
-	test.appendToPosition(4, 2);
-	test.iterateAndPrint();
-	test.deleteFromPosition(3);
-	test.iterateAndPrint();
+	test.appendToPosition(15, 0);
+	test.printList();
+	/*test.deleteFromPosition(3);
+	test.printList();
 	test.deleteFromPosition(2);
-	test.iterateAndPrint();
-	test.deleteFromTail();
-	test.iterateAndPrint();
+	test.printList();*/
+	//test.deleteFromTail();
+	/*test.deleteFromHead();
+	test.printList();*/
 	//test.deleteFromTail();
 	//test.deleteFromHead();
-	//test.iterateAndPrint();
+	//test.printList();
+	//test.deleteFromTail();
+	/*test.deleteFromHead();
+	test.printList();*/
+	//test.deleteFromTail();
+	//test.deleteFromHead();
+	//test.printList();
+
+	test.deleteFromPosition(0);
+	test.printList();
+	test.deleteFromPosition(1);
+	test.printList();
 	
-	*/
+	
 
 	/*
 	lStack<int> stack;
 
 	stack.push(4);
 	stack.push(12);
+
 	stack.push(20);
 	stack.top();
 	stack.pop();

@@ -1,20 +1,18 @@
 #pragma once
 #include "linkedList.h"
+#include "assert.h"
 
 template<class datType>
 List<datType>::List()
 {
-	root = new lNode<datType>();
-	root->data = -1;
-	root->nextlNode = NULL;
+	root = NULL;
 	_size = 0;
-
 	tail = NULL;
 }
 
 // Appends a node to the tail and returns the pointer to the appended node
 template<class datType>
-lNode<datType>* List<datType>::appendToTailAndReturn(int data)
+lNode<datType>* List<datType>::appendToTailAndReturn(datType data)
 {
 	lNode<datType> *newlNode;
 	newlNode = new lNode<datType>();
@@ -22,10 +20,10 @@ lNode<datType>* List<datType>::appendToTailAndReturn(int data)
 	newlNode->nextlNode = NULL;
 
 	//If the only node is the head node
-	if (root->nextlNode == NULL)
+	if (root == NULL)
 	{
 		//Make the root point to the new node
-		root->nextlNode = newlNode;
+		root = newlNode;
 	}
 	else
 	{
@@ -35,10 +33,7 @@ lNode<datType>* List<datType>::appendToTailAndReturn(int data)
 
 		//Iterate through the list
 		while (iterator->nextlNode != NULL)
-		{
 			iterator = iterator->nextlNode;
-
-		}
 
 		iterator->nextlNode = newlNode;
 	}
@@ -54,24 +49,27 @@ lNode<datType>* List<datType>::appendToTailAndReturn(int data)
 template<class datType>
 datType List<datType>::deleteFromHeadAndReturn()
 {
-	datType retVal = root->data;
-	if (root->nextlNode == NULL)
+	if (root == NULL)
 	{
 		cout << "No lNodes to delete from head" << endl;
-		return retVal;
+		return -1;
 	}
+	
+	datType retVal = root->data;
+
 	//The node after the first
-	lNode<datType> *temp = root->nextlNode;
-	retVal = temp->data;
-	root->nextlNode = temp->nextlNode;
-	delete temp;
+	lNode<datType>* temp = root;
+	root = temp->nextlNode;
+
 	_size--;
 
-	if (_size == 0) {
-		//cout << "Nullifying the tail" << endl;
+	if (_size == 0) 
+	{
+		root = NULL;
 		tail = NULL;
 	}
 
+	delete temp;
 	return retVal;
 }
 
@@ -79,15 +77,21 @@ datType List<datType>::deleteFromHeadAndReturn()
 template<class datType>
 void List<datType>::deleteFromPosition(int position)
 {
-
-	if (position <= 0)
+	if (position < 0 || position >= _size)
 	{
 		cout << "Error invalid position : " << position << endl;
 		return;
 	}
+	
+	cout << "Deleting From position " << position << endl;
+
+	if (position == 0)
+	{
+		deleteFromHead();
+		return;
+	}
 
 	//Valid Position so iterator till position - 1 and add the node there
-
 	lNode<datType> *iterator;
 	iterator = root;
 
@@ -95,72 +99,79 @@ void List<datType>::deleteFromPosition(int position)
 	int currentPosition = 0;
 
 	//cout<<"Position - 1 " << position-1;
-	while (iterator->nextlNode != NULL && (position - 1) != currentPosition)
+	while (iterator->nextlNode != NULL && (currentPosition + 1) != position)
 	{
 		currentPosition++;
 		iterator = iterator->nextlNode;
-
 	}
 
-	if (iterator->nextlNode == NULL)
+	if (iterator == tail)
 	{
-		cout << "Invalid Position " << endl;
+		cout << "Deleting from tail " << endl;
+		deleteFromTail();
 		return;
 	}
 
-	lNode<datType> *temp = (iterator->nextlNode)->nextlNode;
-	delete iterator->nextlNode;
-	iterator->nextlNode = temp;
+	//here nextlNode cannot be null
+	assert(iterator->nextlNode != NULL);
+
+	lNode<datType> *toDelete = iterator->nextlNode;
+	iterator->nextlNode = toDelete->nextlNode;
 
 	_size--;
 
-	if (temp == NULL) {
-
-		if (_size > 0) {
-			cout << "Deleting the last node" << endl;
-			tail = iterator;
-		}
-		else {
-			//cout << "Nullifying the tail" << endl;
-			tail = NULL;
-		}
+	if (_size == 0)
+	{
+		tail = NULL;
+		root = NULL;
 	}
+
+	delete toDelete;
 }
 
 //Delete node from head
 template<class datType>
 void List<datType>::deleteFromHead()
 {
-	if (root->nextlNode == NULL)
+	if (root == NULL)
 	{
 		cout << "No lNodes to delete from head" << endl;
 		return;
 	}
+
+	cout << " Deleting from Head " << endl;
+
 	//The node after the first
-	lNode<datType> *temp = root->nextlNode;
-	root->nextlNode = temp->nextlNode;
-	delete temp;
+	lNode<datType> *temp = root;
+	root = temp->nextlNode;
+	
 	_size--;
 
 	if (_size == 0) {
 		//cout << "Nullifying the tail" << endl;
 		tail = NULL;
+		root = NULL;
 	}
+
+	delete temp;
 }
 
 //Delete node from tail
 template<class datType>
 void List<datType>::deleteFromTail()
 {
-	//Iterator
-	lNode<datType> *iterator;
-	iterator = root;
-
-	if (iterator->nextlNode == NULL)
+	if (tail == NULL)
 	{
 		cout << "No more lNodes to delete " << endl;
 		return;
 	}
+
+	cout << "Deleting From Tail " << endl;
+
+	//Iterator
+	lNode<datType> *iterator;
+	iterator = root;
+
 	//tracking the previous node
 	lNode<datType> *previouslNode = NULL;
 
@@ -170,40 +181,57 @@ void List<datType>::deleteFromTail()
 		iterator = iterator->nextlNode;
 	}
 
-	delete previouslNode->nextlNode;
-	previouslNode->nextlNode = NULL;
+	if (iterator == root)
+	{
+		deleteFromHead();
+		return;
+	}
 
+	previouslNode->nextlNode = NULL;
 	_size--;
 
-	if (_size > 0)
+	tail = previouslNode;
+
+	if (_size == 0)
 	{
-		//Reassign the tail to previous node since thats the end of the list now
-		tail = previouslNode;
-	}
-	else 
-	{
-		//cout << "Nullifying the tail" << endl;
 		tail = NULL;
+		root = NULL;
 	}
+
+	delete iterator;
 }
 
-//Append a new lNode to the given position within the current size i.e position should be always <= size
+//Append a new lNode to the given position within the current size i.e position should be always < size
 template<class datType>
-void List<datType>::appendToPosition(int data, int position)
+void List<datType>::appendToPosition(datType data, int position)
 {
-	lNode<datType> *newlNode;
-	newlNode = new lNode();
- 	newlNode->data = data;
-	newlNode->nextlNode = NULL;
-
-	if (position <= 0)
+	if (position < 0)
 	{
 		cout << "Error invalid position : " << position << endl;
 		return;
 	}
+	
+	if (position >= _size)
+	{
+		cout << "Position greater than the size of the linked list" << endl;
+		return;
+	}
+
+	lNode<datType> *newlNode;
+	newlNode = new lNode<datType>();
+	newlNode->data = data;
+	newlNode->nextlNode = NULL;
+
+	cout << " Appending " << data << " To position " << position << endl;
+
+	//Append to head if the position is zero
+	if (position == 0)
+	{
+		appendToHead(data);
+		return;
+	}
 
 	//Valid Position so iterator till position - 1 and add the node there
-
 	lNode<datType> *iterator;
 	iterator = root;
 
@@ -211,18 +239,13 @@ void List<datType>::appendToPosition(int data, int position)
 	int currentPosition = 0;
 
 	//cout<<"Position - 1 " << position-1;
-	while (iterator->nextlNode != NULL && (position - 1) != currentPosition)
+	while (iterator->nextlNode != NULL && currentPosition != position)
 	{
 		currentPosition++;
 		iterator = iterator->nextlNode;
 
 	}
 
-	if (iterator->nextlNode == NULL)
-	{
-		cout << "Invalid Position " << endl;
-		return;
-	}
 	newlNode->nextlNode = iterator->nextlNode;
 	iterator->nextlNode = newlNode;
 
@@ -231,20 +254,25 @@ void List<datType>::appendToPosition(int data, int position)
 
 //Append a new lNode to the head
 template<class datType>
-void List<datType>::appendToHead(int data)
+void List<datType>::appendToHead(datType data)
 {
 	lNode<datType> *newlNode;
-	newlNode = new lNode();
+	newlNode = new lNode<datType>();
 	newlNode->data = data;
-	newlNode->nextlNode = root->nextlNode;
 	
-	//If we are appending to an empty list
-	if (_size == 0) {
-		cout << "Assigning A new tail" << endl;
+	cout << "Appending " << data << " To Head " << endl;
+
+	if (root == NULL)
+	{
+		cout << "Adding to an empty list hence updating both root and tail" << endl;
+		root = newlNode;
 		tail = newlNode;
 	}
-	//make the root point to this node
-	root->nextlNode = newlNode;
+	else
+	{
+		newlNode->nextlNode = root;
+		root = newlNode;
+	}
 
 	_size++;
 
@@ -252,57 +280,65 @@ void List<datType>::appendToHead(int data)
 
 //Append a new lNode to the Tail
 template<class datType>
-void List<datType>::appendToTail(int data)
+void List<datType>::appendToTail(datType data)
 {
 	lNode<datType> *newlNode;
-	newlNode = new lNode();
+	newlNode = new lNode<datType>();
 	newlNode->data = data;
 	newlNode->nextlNode = NULL;
 
+	cout << "Appending " << data << "To Tail " << endl;
+
 	//If the only node is the head node
-	if (root->nextlNode == NULL)
+	if (root == NULL)
 	{
 		//Make the root point to the new node
-		root->nextlNode = newlNode;
+		root = newlNode;
 	}
 	else
 	{
-		//Initialize the iterator
-		lNode *iterator;
-		iterator = root;
+		tail->nextlNode = newlNode;
+		tail = newlNode;
 
-		//Iterate through the list
-		while (iterator->nextlNode != NULL)
-		{
-			iterator = iterator->nextlNode;
+		////Initialize the iterator
+		//lNode<datType>* iterator;
+		//iterator = root;
 
-		}
+		////Iterate through the list
+		//while (iterator->nextlNode != NULL)
+		//{
+		//	iterator = iterator->nextlNode;
 
-		iterator->nextlNode = newlNode;
+		//}
+
+		//iterator->nextlNode = newlNode;
 	}
 
 	//Assign tail to the end of the list
 	tail = newlNode;
 	_size++;
-
 }
 
 //Iterate through the list and print all the values
 template<class datType>
-void List<datType>::iterateAndPrint()
+void List<datType>::printList()
 {
 	lNode<datType> *iterator;
 	iterator = root;
 
-	if (iterator->nextlNode == NULL)
+	if (iterator == NULL)
 	{
 		cout << "No lNodes Present " << endl;
 		return;
 	}
-	cout << "Values (Total : "<<_size <<") : ";
+	//cout << "Values (Total : " << _size << ") : ";
 	while (iterator != NULL)
 	{
-		cout << "\t" << iterator->data;
+		cout << iterator->data;
+		
+		if (iterator->nextlNode != NULL)
+			cout << "->";
+
 		iterator = iterator->nextlNode;
 
 	}
@@ -328,7 +364,7 @@ lNode<datType>* List<datType>::GetTail()
 template<class datType>
 void List<datType>::clear()
 {
-	while (root->nextlNode != NULL) 
+	while (root != NULL) 
 	{
 		deleteFromTail();
 	}
