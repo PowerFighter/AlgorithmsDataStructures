@@ -3,6 +3,7 @@
 #include "doubleLinkedList.cpp"
 #include "Sorting.h"
 #include "Heap.h"
+#include "Graph.cpp"
 
 //Recursion tests
 #include "Recursion.h"
@@ -190,7 +191,7 @@ int main()
 	
 	List<int> test;
 
-	test.appendToHead(1);
+	/*test.appendToHead(1);
 	test.printList();
 	test.appendToHead(2);
 	test.printList();
@@ -201,10 +202,10 @@ int main()
 	test.appendToHead(11);
 	test.printList();
 	test.appendToTail(12);
-	test.printList();
+	test.printList();*/
 	//test.deleteFromHeadAndReturn();
-	test.appendToPosition(15, 0);
-	test.printList();
+	/*test.appendToPosition(15, 0);
+	test.printList();*/
 	/*test.deleteFromPosition(3);
 	test.printList();
 	test.deleteFromPosition(2);
@@ -222,10 +223,10 @@ int main()
 	//test.deleteFromHead();
 	//test.printList();
 
-	test.deleteFromPosition(0);
+	/*test.deleteFromPosition(0);
 	test.printList();
 	test.deleteFromPosition(1);
-	test.printList();
+	test.printList();*/
 	
 	
 
@@ -268,6 +269,20 @@ int main()
 	dlList.printListForward();
 	*/
 	
+	Graph<int> graph(5);
+	graph.UpdateVertexData(0, 50);
+	graph.UpdateVertexData(1, 100);
+	graph.UpdateVertexData(2, 150);
+	graph.UpdateVertexData(3, 200);
+	graph.UpdateVertexData(4, 250);
+	graph.UpdateVertexData(5, 300);
+
+	graph.AddEdge(0, 1);
+	graph.AddEdge(1, 4);
+	//graph.AddEdge(1, 4);
+	graph.AddEdge(1, 4);
+	graph.AddEdge(1, 0);
+	graph.Print();
 	while (!getchar()) 
 	{
 

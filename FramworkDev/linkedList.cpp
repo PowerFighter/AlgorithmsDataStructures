@@ -299,19 +299,6 @@ void List<datType>::appendToTail(datType data)
 	{
 		tail->nextlNode = newlNode;
 		tail = newlNode;
-
-		////Initialize the iterator
-		//lNode<datType>* iterator;
-		//iterator = root;
-
-		////Iterate through the list
-		//while (iterator->nextlNode != NULL)
-		//{
-		//	iterator = iterator->nextlNode;
-
-		//}
-
-		//iterator->nextlNode = newlNode;
 	}
 
 	//Assign tail to the end of the list
@@ -368,4 +355,32 @@ void List<datType>::clear()
 	{
 		deleteFromTail();
 	}
+}
+
+template<class datType>
+bool List<datType>::IsEmpty()
+{
+	return root == NULL;
+}
+
+template<class datType>
+bool List<datType>::Find(datType data)
+{
+	lNode<datType>* iterator;
+	iterator = root;
+
+	if (iterator == NULL)
+		return false;
+
+	//cout << "Values (Total : " << _size << ") : ";
+	while (iterator != NULL)
+	{
+		if (iterator->data == data)
+			return true;
+
+		iterator = iterator->nextlNode;
+
+	}
+
+	return false;
 }

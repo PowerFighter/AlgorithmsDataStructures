@@ -23,6 +23,9 @@ class List
   int getSize();
   lNode<datType>* GetTail();
   void clear();
+  bool IsEmpty();
+
+  bool Find(datType data);
 
   //Specifics for queue
   lNode<datType>* appendToTailAndReturn(datType data);

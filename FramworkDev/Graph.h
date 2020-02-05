@@ -6,8 +6,13 @@ struct GraphNode
 {
 	int idx;
 	datType data;
-	List<GraphNode<datType>> adjacentNodes;
+	List<int> adjacentNodes;
 	
+	GraphNode()
+	{
+
+	}
+
 	GraphNode(datType inData)
 	{
 		data = inData;
@@ -20,9 +25,12 @@ class Graph
 
 public:
 	Graph();
-	void AddVertex(int id, datType data);
-
+	Graph(int size);
+	void UpdateVertexData(int id, datType data);
+	void AddEdge(int sIdx, int eIdx);
+	void Print();
 private:
 	int size;
-	List<GraphNode<datType>> linkedList;
+	GraphNode<datType>* Nodes;
+
 };
