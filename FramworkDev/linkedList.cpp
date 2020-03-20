@@ -347,6 +347,12 @@ lNode<datType>* List<datType>::GetTail()
 	return tail;
 }
 
+template<class datType>
+lNode<datType>* List<datType>::GetHead()
+{
+	return root;
+}
+
 //Clear the whole list until we reach the root
 template<class datType>
 void List<datType>::clear()

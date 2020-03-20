@@ -29,6 +29,8 @@ public:
 	void UpdateVertexData(int id, datType data);
 	void AddEdge(int sIdx, int eIdx);
 	void Print();
+	GraphNode<datType>* GetArray();
+	int GetSize() const { return size; }
 private:
 	int size;
 	GraphNode<datType>* Nodes;

@@ -54,6 +54,9 @@
     <ClInclude Include="Graph.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Trie.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="linkedList.cpp">
@@ -81,6 +84,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Graph.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Trie.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

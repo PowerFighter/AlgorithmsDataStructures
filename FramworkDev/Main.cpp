@@ -4,6 +4,7 @@
 #include "Sorting.h"
 #include "Heap.h"
 #include "Graph.cpp"
+#include "Trie.h"
 
 //Recursion tests
 #include "Recursion.h"
@@ -269,24 +270,53 @@ int main()
 	dlList.printListForward();
 	*/
 	
-	Graph<int> graph(5);
+	/*Graph<int> graph(4);
 	graph.UpdateVertexData(0, 50);
 	graph.UpdateVertexData(1, 100);
 	graph.UpdateVertexData(2, 150);
-	graph.UpdateVertexData(3, 200);
-	graph.UpdateVertexData(4, 250);
-	graph.UpdateVertexData(5, 300);
+	graph.UpdateVertexData(3, 200);*/
+	/*graph.UpdateVertexData(4, 250);
+	graph.UpdateVertexData(5, 300);*/
 
-	graph.AddEdge(0, 1);
-	graph.AddEdge(1, 4);
+	/*graph.AddEdge(0, 1);
+	graph.AddEdge(0, 2);*/
 	//graph.AddEdge(1, 4);
-	graph.AddEdge(1, 4);
-	graph.AddEdge(1, 0);
-	graph.Print();
-	while (!getchar()) 
+	/*graph.AddEdge(1, 2);
+	graph.AddEdge(2, 3);
+	graph.Print();*/
+
+	//cout << "Mother Vertex " << findMotherVertex(graph) << endl;
+
+	std::vector<std::string> possibleOut;
+	std::string inVal;
+
+	Trie* trie = new Trie(26);
+	trie->Insert(std::string("Mom"));
+	trie->Insert(std::string("mother"));
+	trie->Insert(std::string("father"));
+	trie->Insert(std::string("dat"));
+
+	std::cout << "Enter Test Value " << std::endl;
+
+	while (std::cin >> inVal)
+	{
+		std::cout << "Auto Complete Choices : " << std::endl;
+		trie->AutoCompleteChoices(inVal, possibleOut);
+
+		for (int i = 0; i < possibleOut.size(); i++)
+		{
+			std::cout << possibleOut[i] << std::endl;
+		}
+
+		std::cout << std::endl;
+		std::cout << "Enter Test Value " << std::endl;
+	}
+
+
+	while (!getchar())
 	{
 
 	}
-	
+
 	return 0;
 }

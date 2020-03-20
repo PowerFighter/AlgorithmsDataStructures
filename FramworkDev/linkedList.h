@@ -22,6 +22,7 @@ class List
   void printList();
   int getSize();
   lNode<datType>* GetTail();
+  lNode<datType>* GetHead();
   void clear();
   bool IsEmpty();
 

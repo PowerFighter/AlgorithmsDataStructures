@@ -23,6 +23,7 @@
     <ClInclude Include="Recursion.h" />
     <ClInclude Include="Sorting.h" />
     <ClInclude Include="stackUsingLinkedList.h" />
+    <ClInclude Include="Trie.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BinarySearchTree.cpp" />
@@ -34,6 +35,7 @@
     <ClCompile Include="queueUsingLinkedList.cpp" />
     <ClCompile Include="Sorting.cpp" />
     <ClCompile Include="stackUsingLinkedList.cpp" />
+    <ClCompile Include="Trie.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8DD16DEB-8A90-4145-9CC1-70FB87EAF46F}</ProjectGuid>

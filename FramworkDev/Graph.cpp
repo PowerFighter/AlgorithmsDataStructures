@@ -68,3 +68,9 @@ void Graph<datType>::Print()
 		}
 	}
 }
+
+template<class datType>
+GraphNode<datType>* Graph<datType>::GetArray()
+{
+	return Nodes;
+}
